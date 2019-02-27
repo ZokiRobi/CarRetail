@@ -2,22 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarShop.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc;
+using CarShop.Core.Models.CarModels;
 
 namespace CarShop
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
         {
+            Configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContextPool<CarShopDbContext>(
+               options =>
+               {
+                   options.UseSqlServer(Configuration.GetConnectionString("CarShopDatabase"));
+               }
+               );
+
+            services.AddScoped<IRepository<Car>, Repository<Car>>();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+        }
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -29,6 +48,12 @@ namespace CarShop
             {
                 await context.Response.WriteAsync("Hello World!");
             });
+
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseMvc();
         }
     }
 }
