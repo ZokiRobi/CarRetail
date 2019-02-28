@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
-using CarShop.Core.Models.CarModels;
+using CarShop.Helpers;
 
 namespace CarShop
 {
@@ -29,7 +29,7 @@ namespace CarShop
                );
 
             services.AddCors();
-            
+
             services.AddScoped<ICarRepository, CarRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

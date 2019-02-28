@@ -8,6 +8,7 @@ namespace CarShop.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarModel> CarModels { get; set; }
         public DbSet<CarManufacturer> CarManufacturers { get; set; }
+        public DbSet<CarPhoto> CarPhotos { get; set; }
 
         public CarShopDbContext(DbContextOptions<CarShopDbContext> options) : base(options)
         {
