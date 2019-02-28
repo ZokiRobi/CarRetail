@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace CarShop.Core.Models.CarModels
+﻿namespace CarShop.Core.Models.CarModels
 {
     public class CarManufacturer
     {

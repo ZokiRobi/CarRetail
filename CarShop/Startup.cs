@@ -23,12 +23,12 @@ namespace CarShop
         {
             services.AddDbContextPool<CarShopDbContext>(
                options =>
-               {
-                   options.UseSqlServer(Configuration.GetConnectionString("CarShopDatabase"));
-               }
+                   {
+                       options.UseSqlServer(Configuration.GetConnectionString("CarShopDatabase"));
+                   }
                );
 
-            services.AddScoped<IRepository<Car>, Repository<Car>>();
+            services.AddScoped<ICarRepository, CarRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -40,16 +40,16 @@ namespace CarShop
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
-
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseMvc();
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            });
         }
     }
 }

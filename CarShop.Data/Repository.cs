@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CarShop.Data
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly CarShopDbContext dbContext;
 
@@ -13,26 +13,32 @@ namespace CarShop.Data
             this.dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IQueryable<TEntity>> GetAll()
         {
-            return await dbContext.Set<T>().ToListAsync();
+            var res = dbContext.Set<TEntity>().AsNoTracking();
+            return await Task.FromResult(res);
         }
 
-        public async Task<T> Add(T entity)
+        public async Task<TEntity> GetById(int id)
         {
-            dbContext.Set<T>().Add(entity);
+            return await dbContext.Set<TEntity>().FindAsync(id);
+        }
+
+        public async Task<TEntity> Add(TEntity entity)
+        {
+            dbContext.Set<TEntity>().Add(entity);
             return await Task.FromResult(entity);
         }
 
-        public async Task<T> Update(T entity)
+        public async Task<TEntity> Update(TEntity entity)
         {
-            dbContext.Set<T>().Update(entity);
+            dbContext.Set<TEntity>().Update(entity);
             return await Task.FromResult(entity);
         }
 
-        public async Task<T> Delete(T entity)
+        public async Task<TEntity> Delete(TEntity entity)
         {
-            dbContext.Set<T>().Remove(entity);
+            dbContext.Set<TEntity>().Remove(entity);
             return await Task.FromResult(entity);
         }
         public async Task<int> Commit()
