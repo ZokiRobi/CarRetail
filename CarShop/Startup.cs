@@ -28,6 +28,8 @@ namespace CarShop
                    }
                );
 
+            services.AddCors();
+            
             services.AddScoped<ICarRepository, CarRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -41,6 +43,7 @@ namespace CarShop
             }
 
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

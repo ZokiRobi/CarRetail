@@ -19,7 +19,7 @@ namespace CarShop.Controllers
             this.repository = repository;
         }
 
-        [Route("index")]
+        [Route("GetAllCars")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
