@@ -1,0 +1,6 @@
+.textarea-description{
+    width: 100%;
+    resize: none;
+    padding-right: 0;
+    min-width: 100%;
+}

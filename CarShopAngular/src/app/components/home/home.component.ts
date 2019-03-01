@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CarService } from 'src/app/services/car.service';
 import { CarModel } from 'src/app/models/CarModel';
-import { fromEvent, pipe, Subject, Observable } from 'rxjs';
+import { fromEvent, pipe, Subject, Observable, Subscription } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -9,29 +9,23 @@ import { map, takeUntil } from 'rxjs/operators';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy{
-
-  cars:CarModel[];
-  clicks = fromEvent(document, 'click');
-  clickEvent:Event;
-  _destroyed: Subject<void>;
- 
+export class HomeComponent implements OnInit, OnDestroy {
+  cars: CarModel[];
+  dest = new Subject();
+  private sub: Subscription = new Subscription();
 
   constructor(private service: CarService) { }
 
-  ngOnInit() {
-    this.service.getCars().subscribe((response:CarModel[]) => this.cars = response); 
-    this.service.getCars().pipe(takeUntil(this._destroyed));
-  }
 
-  test(){
-    this.clicks.subscribe(x => console.log(this.cars));
+  ngOnInit() {
+     this.service.getCars()
+                 .pipe(takeUntil(this.dest), map(cars => cars))
+                 .subscribe((cars:CarModel[]) => this.cars = cars);
   }
 
   ngOnDestroy(): void {
-    this._destroyed.next();
-    this._destroyed.complete();
+      this.dest.next();
+      this.dest.complete();
   }
 
 }
- 

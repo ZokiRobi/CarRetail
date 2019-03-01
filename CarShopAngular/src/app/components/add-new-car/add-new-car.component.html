@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12-col-md-12">
+      <form [formGroup]="addCarForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div class="col-3">
+          <label for="manufacturer">Manufacturer</label>
+          <input type="text" name="manufacturer" formControlName="manufacturer" />
+        </div>
+        <div class="col-3 form-group">
+          <label for="model">Model</label>
+          <input type="text" name="model" formControlName="model" />
+        </div>
+        <div class="col-8 form-group">
+          <label for="description">Description</label>
+          <textarea type="text" name="description" formControlName="description" class="form-control textarea-description" cols="25" rows="6"></textarea>
+        </div>
+        <div class="col-3">
+          <button type="submit" [disabled]="!addCarForm.valid" class="btn btn-success">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

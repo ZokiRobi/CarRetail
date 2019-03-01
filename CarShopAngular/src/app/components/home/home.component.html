@@ -1,5 +1,7 @@
 <div class="row">
-  <div class="col-12 col-md-12" (click)="test(div)" #div>
-    <p>test</p>
+  <div class="col-12 col-md-12">
+    <ul>
+       <li *ngFor="let car of cars">{{ car | json }}</li>
+    </ul>
   </div>
 </div>
