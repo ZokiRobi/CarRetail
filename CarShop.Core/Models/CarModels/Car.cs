@@ -8,7 +8,7 @@ namespace CarShop.Core.Models.CarModels
         [Required]
         public int CarManufacturerId { get; set; }
 
-        public string CarManuFacuterName { get; set; }
+        public string CarManufacturerName { get; set; }
 
         [Required]
         public int CarModelId { get; set; }

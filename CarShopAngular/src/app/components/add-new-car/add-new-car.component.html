@@ -1,23 +1,92 @@
 <div class="container">
   <div class="row">
-    <div class="col-12-col-md-12">
+    <div class="col-12 col-md-12 noPaddingLeft">
+      <!-- add car form start -->
       <form [formGroup]="addCarForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
-        <div class="col-3">
+        <!-- manufacturer start -->
+        <div class="col-5 noPaddingLeft">
           <label for="manufacturer">Manufacturer</label>
-          <input type="text" name="manufacturer" formControlName="manufacturer" />
+          
+          <select2
+            [data]="carManufacturers"
+            [cssImport]="true"
+            [width]="440"
+            [options]="selectOptions"
+            (valueChanged)="manufacturerSelectChanged($event)"
+          ></select2>
         </div>
-        <div class="col-3 form-group">
+        <!-- manufacturer end -->
+
+        <!-- Model start -->
+        <div class="col-5 noPaddingLeft">
           <label for="model">Model</label>
-          <input type="text" name="model" formControlName="model" />
+          <br />
+          <select2
+            [data]="carModels"
+            [cssImport]="true"
+            [width]="440"
+            [options]="selectOptions"
+            (valueChanged)="modelSelectChanged($event)"
+          ></select2>
         </div>
-        <div class="col-8 form-group">
+        <!-- Model end --> 
+
+        <!-- description start -->
+        <div class="col-5 form-group noPaddingLeft">
           <label for="description">Description</label>
-          <textarea type="text" name="description" formControlName="description" class="form-control textarea-description" cols="25" rows="6"></textarea>
+          <textarea
+            type="text"
+            name="description"
+            formControlName="description"
+            class="form-control textarea-description"
+            cols="25"
+            rows="6"
+            [ngClass]="{
+              'input-invalid':
+                description.invalid &&
+                (description.dirty || description.touched)
+            }"
+          ></textarea>
+          <span *ngIf="description.invalid">
+            <span
+              *ngIf="
+                description.value?.length > 0 &&
+                description.dirty &&
+                description.errors?.whitespace
+              "
+              class="text-danger"
+              >Cant be just whitespace
+            </span>
+            <span
+              *ngIf="
+                (description.touched || description.dirty) &&
+                description.value.length == 0
+              "
+              class="text-danger"
+            >
+              Description is required
+            </span>
+          </span>
         </div>
-        <div class="col-3">
-          <button type="submit" [disabled]="!addCarForm.valid" class="btn btn-success">Add</button>
+        <!-- description start -->
+
+        <div class="col-3 noPaddingLeft">
+          <!-- submit button -->
+          <button
+            type="submit"
+            [disabled]="!addCarForm.valid"
+            [title]="!addCarForm.valid ? 'All field are required' : ''"
+            [ngClass]="{
+              'btn-success': addCarForm.valid,
+              'btn-danger': !addCarForm.valid
+            }"
+            class="btn"
+          >
+            Add
+          </button>
         </div>
       </form>
+      <!-- add car form end -->
     </div>
   </div>
 </div>

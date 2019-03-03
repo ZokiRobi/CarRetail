@@ -4,3 +4,11 @@
     padding-right: 0;
     min-width: 100%;
 }
+
+.input-invalid{
+    border: 1px solid red;
+}
+
+.noPaddingLeft{
+    padding-left: 0;
+}

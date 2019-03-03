@@ -1,19 +1,20 @@
 ﻿using CarShop.Core.Models.CarModels;
 using CarShop.Data;
+using CarShop.Helpers;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
-namespace CarShop.Helpers
+namespace CarShop.Controllers
 {
-    public class PhotosUploadHelper
+    public class PhotosController
     {
         private readonly CarShopDbContext dbContext;
         private readonly Cloudinary cloudinary;
 
-        public PhotosUploadHelper(CarShopDbContext dbContext, IConfiguration configuration)
+        public PhotosController(CarShopDbContext dbContext, IConfiguration configuration)
         {
             this.dbContext = dbContext;
 

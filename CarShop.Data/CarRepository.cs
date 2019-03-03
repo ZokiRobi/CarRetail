@@ -1,7 +1,4 @@
 ﻿using CarShop.Core.Models.CarModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CarShop.Data
 {

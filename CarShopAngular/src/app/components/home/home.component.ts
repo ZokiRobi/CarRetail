@@ -11,7 +11,7 @@ import { map, takeUntil } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   cars: CarModel[];
-  dest = new Subject();
+  destroyed = new Subject();
   private sub: Subscription = new Subscription();
 
   constructor(private service: CarService) { }
@@ -19,13 +19,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
      this.service.getCars()
-                 .pipe(takeUntil(this.dest), map(cars => cars))
+                 .pipe(takeUntil(this.destroyed), map(cars => cars))
                  .subscribe((cars:CarModel[]) => this.cars = cars);
   }
 
   ngOnDestroy(): void {
-      this.dest.next();
-      this.dest.complete();
+      this.destroyed.next();
+      this.destroyed.complete();
   }
 
 }
