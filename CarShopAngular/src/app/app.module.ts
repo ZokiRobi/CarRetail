@@ -10,13 +10,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddNewCarComponent } from './components/add-new-car/add-new-car.component';
+import { CarCardComponent } from './components/car-card/car-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent, 
-    AddNewCarComponent
+    AddNewCarComponent, CarCardComponent
   ],
   imports: [
     BrowserModule,

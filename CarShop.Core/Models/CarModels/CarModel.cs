@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace CarShop.Core.Models.CarModels
 {
-    public class CarModel
+    public class CarModel : ICarEntity
     {
         public int Id { get; set; }
         public string Code { get; set; }

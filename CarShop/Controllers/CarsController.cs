@@ -1,7 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using CarShop.Core.Models.CarModels;
 using CarShop.Data;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Data;
+using Microsoft.EntityFrameworkCore;
+using CarShop.Helpers;
 
 namespace CarShop.Controllers
 {
@@ -11,11 +19,13 @@ namespace CarShop.Controllers
     {
         private readonly ICarRepository repository;
         private readonly CarShopDbContext context;
+        private readonly IHostingEnvironment appEnvironment;
 
-        public CarsController(ICarRepository repository, CarShopDbContext context)
+        public CarsController(ICarRepository repository, CarShopDbContext context, IHostingEnvironment appEnvironment)
         {
             this.repository = repository;
             this.context = context;
+            this.appEnvironment = appEnvironment;
         }
 
         [Route("GetAllCars")]
@@ -39,10 +49,11 @@ namespace CarShop.Controllers
         }
 
         [Route("GetManufacturers")]
+        [ResponseCache(Duration = 10000)]
         public async Task<IActionResult> GetManufacturers()
         {
-            CarApiController controller = new CarApiController();
-            var result = await controller.GetManufacturersSelectListItems();
+            var result = await context.CarManufacturers.AsNoTracking().ToListAsync().GetMakesSelectListObjectItems();
+
             return new JsonResult(result);
         }
 
@@ -53,5 +64,6 @@ namespace CarShop.Controllers
             var result = await controller.GetModelsSelectListItems(manufacturerId);
             return new JsonResult(result);
         }
+
     }
 }

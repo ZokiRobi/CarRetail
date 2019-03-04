@@ -1,6 +1,6 @@
 ﻿namespace CarShop.Core.Models.CarModels
 {
-    public class CarManufacturer
+    public class CarManufacturer : ICarEntity
     {
         public int Id { get; set; }
         public string Code { get; set; }

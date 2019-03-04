@@ -61,12 +61,6 @@ export class AddNewCarComponent implements OnInit, OnDestroy {
   }
 
   // addCarForm FormControl getters
-  get manufacturer() {
-    return this.addCarForm.get("manufacturer");
-  }
-  get model() {
-    return this.addCarForm.get("model");
-  }
   get description() {
     return this.addCarForm.get("description");
   }

@@ -9,7 +9,6 @@ namespace CarShop.Controllers
 {
     public class CarApiController
     {
-        public string detUrl { get; set; } = "/vehicles/GetModelsForMakeId/440?format=json";
         public async Task<string> GetManufacturersJSON()
         {
             var apiUrl = "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json";

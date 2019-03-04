@@ -1,0 +1,11 @@
+.cardItem{
+    width: 14rem;
+    margin: auto;
+}
+.carContainer{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
