@@ -47,7 +47,6 @@ namespace CarShop.Controllers
         public async Task<IActionResult> GetManufacturers()
         {
             var result = await context.CarManufacturers.AsNoTracking().ToListAsync().GetMakesSelectListObjectItems();
-
             return new JsonResult(result);
         }
 
