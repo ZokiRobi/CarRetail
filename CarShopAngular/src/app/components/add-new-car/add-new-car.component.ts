@@ -10,7 +10,6 @@ import {
 import { CarModel } from "src/app/models/CarModel";
 import { CarService } from "src/app/services/car.service";
 import { from, Subscription } from "rxjs";
-import { Select2Component } from "ng2-select2";
 
 @Component({
   selector: "app-add-new-car",
@@ -50,9 +49,11 @@ export class AddNewCarComponent implements OnInit, OnDestroy {
   }
 
   manufacturerSelectChanged(e) {
-    this.manufacturerId = e.value;
-    this.manufacturerName = e.data[0].text;
-    this.service.GetCarModels(e.value).subscribe(m => (this.carModels = m));
+    if (e.value != null) {
+      this.manufacturerId = e.value;
+      this.manufacturerName = e.data[0].text;
+      this.service.GetCarModels(e.value).subscribe(m => (this.carModels = m));
+    }
   }
 
   modelSelectChanged(e) {

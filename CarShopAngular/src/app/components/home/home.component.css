@@ -1,11 +1,12 @@
 .cardItem{
     width: 14rem;
-    margin: auto;
+    margin-right: auto;
+    margin-top: 5px;
 }
 .carContainer{
     margin-top: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 }
