@@ -30,6 +30,14 @@ namespace CarShop.Controllers
             return new JsonResult(await repository.GetAll());
         }
 
+        [Route("GetCarById/{carId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetSingleCar(int carId)
+        {
+            return new JsonResult(await repository.GetById(carId));
+        }
+
+
         [Route("AddCar")]
         [HttpPost]
         public async Task<IActionResult> AddCar(Car car)

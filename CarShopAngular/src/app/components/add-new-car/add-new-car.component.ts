@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Location } from '@angular/common';
 import { Router } from "@angular/router";
 
 import {
@@ -19,24 +20,19 @@ import { from, Subscription } from "rxjs";
 export class AddNewCarComponent implements OnInit, OnDestroy {
   subsciption: Subscription = new Subscription();
   addCarForm;
-  carManufacturers;
+  manufacturers;
   carModels;
-
-  manufacturerId;
-  manufacturerName;
-  modelId;
-  modelName;
 
   selectOptions = {
     theme: "classic"
   };
 
-  constructor(private service: CarService, private router: Router) {}
+  constructor(private service: CarService, private router: Router, private location: Location) { }
 
   ngOnInit() {
     this.subsciption.add(
       this.service.GetCarManufacturers().subscribe(result => {
-        this.carManufacturers = result;
+        this.manufacturers = result;
       })
     );
 
@@ -49,16 +45,12 @@ export class AddNewCarComponent implements OnInit, OnDestroy {
   }
 
   manufacturerSelectChanged(e) {
-    if (e.value != null) {
-      this.manufacturerId = e.value;
-      this.manufacturerName = e.data[0].text;
-      this.service.GetCarModels(e.value).subscribe(m => (this.carModels = m));
-    }
+
+    this.service.GetCarModels(e.value).subscribe(m => (this.carModels = m));
   }
 
   modelSelectChanged(e) {
-    this.modelId = e.value;
-    this.modelName = e.data[0].text;
+
   }
 
   // addCarForm FormControl getters
@@ -76,10 +68,6 @@ export class AddNewCarComponent implements OnInit, OnDestroy {
     var car: CarModel = new CarModel();
 
     if (form.valid) {
-      car.CarModelName = this.modelName;
-      car.CarModelId = this.modelId;
-      car.CarManufacturerId = this.manufacturerId;
-      car.CarManufacturerName = this.manufacturerName;
       car.Description = this.addCarForm.get("description").value;
 
       this.addCarForm.reset();
@@ -88,6 +76,10 @@ export class AddNewCarComponent implements OnInit, OnDestroy {
         this.service.addCar(car).subscribe(c => this.router.navigate(["/"]))
       );
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   ngOnDestroy(): void {

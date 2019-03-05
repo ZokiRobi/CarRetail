@@ -1,0 +1,29 @@
+.ng-fa-icon:hover{
+    cursor: pointer;
+}
+
+.details-icon-span{
+    position: absolute;
+    top: 5px;
+    right:5px;
+}
+
+.edit-icon-span{
+    position: absolute;
+    top: 30px;
+    right:5px;
+}
+
+.delete-icon-span{
+    position: absolute;
+    top: 55px;
+    right:8px;
+}
+
+.cardIconShow{
+    display: initial;
+}
+
+.cardIconHide{
+    display: none;
+}

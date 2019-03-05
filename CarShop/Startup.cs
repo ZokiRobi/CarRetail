@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 using CarShop.Helpers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace CarShop
 {
@@ -32,7 +34,11 @@ namespace CarShop
 
             services.AddScoped<ICarRepository, CarRepository>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(opts =>
+                                {
+                                    opts.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                                });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

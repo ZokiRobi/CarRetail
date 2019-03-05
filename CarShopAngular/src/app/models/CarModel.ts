@@ -1,4 +1,5 @@
 export class CarModel{
+    Id:number;
     CarManufacturerId:number;
     CarManufacturerName:string;
     CarModelId:number;

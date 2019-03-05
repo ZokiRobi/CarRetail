@@ -15,6 +15,10 @@ export class CarService {
     return this.httpClient.get(this.url + "GetAllCars");
   }
 
+  public getCarById(id){
+    return this.httpClient.get(this.url + "GetCarById/" + id);
+  }
+
   public addCar(car:CarModel){
     return this.httpClient.post(this.url + "AddCar", car);
   }

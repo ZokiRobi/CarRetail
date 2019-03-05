@@ -18,14 +18,32 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-     this.service.getCars()
-                 .pipe(takeUntil(this.destroyed), map(cars => cars))
-                 .subscribe((cars:CarModel[]) => this.cars = cars);
+    this.service.getCars()
+      .pipe(takeUntil(this.destroyed), map(cars => cars))
+      .subscribe((cars: CarModel[]) => this.cars = cars);
+  }
+
+  onHoverCardItem(target: HTMLElement) {
+    var spanDetails: any = target.childNodes[0].childNodes[0].childNodes[0];
+    var spanEdit: any = target.childNodes[0].childNodes[0].childNodes[1];
+    var spanDelete: any = target.childNodes[0].childNodes[0].childNodes[2];
+    spanDetails.classList.remove('cardIconHide');
+    spanEdit.classList.remove('cardIconHide');
+    spanDelete.classList.remove('cardIconHide');
+  }
+
+  onBlurCardItem(target) {
+    var spanDetails: any = target.childNodes[0].childNodes[0].childNodes[0];
+    var spanEdit: any = target.childNodes[0].childNodes[0].childNodes[1];
+    var spanDelete: any = target.childNodes[0].childNodes[0].childNodes[2];
+    spanDetails.classList.add('cardIconHide');
+    spanEdit.classList.add('cardIconHide');
+    spanDelete.classList.add('cardIconHide');
   }
 
   ngOnDestroy(): void {
-      this.destroyed.next();
-      this.destroyed.complete();
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
 }
