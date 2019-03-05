@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
-import { SelectModule } from "ng2-select";
+import { SelectDropDownModule } from 'ngx-select-dropdown'
 
 //font awesome imports
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -42,7 +42,7 @@ library.add
     HttpClientModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    SelectModule
+    SelectDropDownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

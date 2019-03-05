@@ -1,15 +1,22 @@
-.textarea-description{
-    width: 100%;
-    resize: none;
-    padding-right: 0;
-    min-width: 100%;
+.textarea-description {
+  width: 100%;
+  resize: none;
+  padding-right: 0;
+  min-width: 100%;
 }
 
-.input-invalid{
-    border: 1px solid red;
+.input-invalid {
+  border: 1px solid red;
 }
 
-.noPaddingLeft{
-    padding-left: 0;
+.noPaddingLeft {
+  padding-left: 0;
 }
 
+ng-select {
+  background-color: white;
+}
+
+.ui-select-choices.dropdown-menu {
+  display: block;
+}

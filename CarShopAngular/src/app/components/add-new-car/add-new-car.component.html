@@ -5,16 +5,8 @@
       <form [formGroup]="addCarForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
         <!-- manufacturer start -->
         <div class="col-5 noPaddingLeft">
-          <label for="manufacturer">Manufacturer</label>
-          <ng-select [allowClear]="true"
-          [items]="items"
-          [disabled]="disabled"
-          (data)="refreshValue($event)"
-          (selected)="selected($event)"
-          (removed)="removed($event)"
-          (typed)="typed($event)"
-          placeholder="No car selected">
-        </ng-select>
+          <label for="manufacturers">Manufacturer</label>
+          <ngx-select-dropdown  [multiple]="false" [options]="manufacturers" formControlName="manufacturer" [config]="configManufacturersSelect" (change)="manufacturerSelectChanged($event)"></ngx-select-dropdown>
         </div>
         <!-- manufacturer end -->
 
@@ -22,31 +14,43 @@
         <div class="col-5 noPaddingLeft">
           <label for="model">Model</label>
           <br />
+          <ngx-select-dropdown  [multiple]="false" [options]="carModels" formControlName="model" [config]="configModelsSelect"></ngx-select-dropdown>
         </div>
         <!-- Model end -->
 
         <!-- description start -->
         <div class="col-5 form-group noPaddingLeft">
           <label for="description">Description</label>
-          <textarea type="text" name="description" formControlName="description" class="form-control textarea-description"
-            cols="25" rows="6" [ngClass]="{
+          <textarea
+            type="text"
+            name="description"
+            formControlName="description"
+            class="form-control textarea-description"
+            cols="25"
+            rows="6"
+            [ngClass]="{
               'input-invalid':
                 description.invalid &&
                 (description.dirty || description.touched)
-            }"></textarea>
+            }"
+          ></textarea>
           <span *ngIf="description.invalid">
-            <span *ngIf="
+            <span
+              *ngIf="
                 description.value?.length > 0 &&
                 description.dirty &&
                 description.errors?.whitespace
               "
-              class="text-danger">Cant be just whitespace
+              class="text-danger"
+              >Cant be just whitespace
             </span>
-            <span *ngIf="
+            <span
+              *ngIf="
                 (description.touched || description.dirty) &&
                 description.value.length == 0
               "
-              class="text-danger">
+              class="text-danger"
+            >
               Description is required
             </span>
           </span>
@@ -55,12 +59,16 @@
         <div class="row noPaddingLeft">
           <div class="col-1">
             <!-- submit button -->
-            <button type="submit" [disabled]="!addCarForm.valid" [title]="!addCarForm.valid ? 'All field are required' : ''"
+            <button
+              type="submit"
+              [disabled]="!addCarForm.valid"
+              [title]="!addCarForm.valid ? 'All field are required' : ''"
               [ngClass]="{
-                    'btn-success': addCarForm.valid,
-                    'btn-danger': !addCarForm.valid
-                  }"
-              class="btn">
+                'btn-success': addCarForm.valid,
+                'btn-danger': !addCarForm.valid
+              }"
+              class="btn"
+            >
               Add
             </button>
           </div>
