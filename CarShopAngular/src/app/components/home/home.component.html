@@ -1,10 +1,15 @@
 <div class="row">
   <div class="col-12 col-md-12 carContainer">
-    <div class="card cardItem" *ngFor="let car of cars; let i = index" (mouseenter)="onHoverCardItem($event.target)" (mouseleave)="onBlurCardItem($event.target)"
-      [ngClass]="{'lastCardItem72': cars.length % 4 == 1 && i == cars.length -1,
-                  'lastCardItem48': cars.length % 4 == 2 && i == cars.length -1,
-                  'lastCardItem24': cars.length % 4 == 3 && i == cars.length -1}">
-      <app-car-card [car]="car"></app-car-card>
-    </div>
+      <div class="card cardItem" 
+           *ngFor="let car of cars; let i = index" 
+           (mouseenter)="hovered = true;  carService.cardItemHovered = i;" 
+           (mouseleave)="hovered = false; carService.cardItemHovered = null"
+           [ngClass]="{'lastCardItem72': cars.length % 4 == 1 && i == cars.length -1,
+                       'lastCardItem48': cars.length % 4 == 2 && i == cars.length -1,
+                       'lastCardItem24': cars.length % 4 == 3 && i == cars.length -1}">
+
+        <app-car-card [car]="car" [indexOfCard]="i"></app-car-card>
+
+      </div>
   </div>
 </div>

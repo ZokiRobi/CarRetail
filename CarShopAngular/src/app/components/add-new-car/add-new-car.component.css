@@ -13,10 +13,11 @@
   padding-left: 0;
 }
 
-ng-select {
-  background-color: white;
-}
-
 .ui-select-choices.dropdown-menu {
   display: block;
+}
+
+.add-car-form{
+  margin-top:20px;
+  width:100%;
 }

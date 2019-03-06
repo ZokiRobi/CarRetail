@@ -8,7 +8,7 @@ namespace CarShop.Helpers
     public static class Extensions
     {
         /// <summary>
-        /// Returns an array of objects with properties id and text, for Select2 select.
+        /// Returns an array of objects with properties id and text, for select.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="items">List of items for select</param>

@@ -7,8 +7,11 @@ import { Constants } from '../Constants';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CarService {
   url = Constants.API_ENDPOINT;
+  cardItemHovered?: number;
+  
   constructor(private httpClient: HttpClient) { } 
 
   public getCars(){

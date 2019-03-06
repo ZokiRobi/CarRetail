@@ -1,6 +1,14 @@
-<div class="card-body">
-    <span class="details-icon-span cardIconHide"><fa-icon [icon]="['fa','eye']" (click)="onDetailsClicked(car.Id)"></fa-icon></span>
-    <span class="edit-icon-span cardIconHide"><fa-icon [icon]="['fas','edit']" (click)="onEditClicked(car.Id)"></fa-icon></span>
-    <span class="delete-icon-span cardIconHide"><fa-icon [icon]="['fa','trash']" (click)="onDeleteClicked(car.Id)"></fa-icon></span>
+<div class="card-body" >
+  <div *ngIf="indexOfCard == carService.cardItemHovered">
+      <span class="details-icon-span">
+          <fa-icon [icon]="['fa','eye']" (click)="onDetailsClicked(car.Id)"></fa-icon>
+        </span>
+        <span class="edit-icon-span">
+          <fa-icon [icon]="['fas','edit']" (click)="onEditClicked(car.Id)"></fa-icon>
+        </span>
+        <span class="delete-icon-span">
+          <fa-icon [icon]="['fa','trash']" (click)="onDeleteClicked(car.Id)"></fa-icon>
+        </span>
+  </div>
   <p class="card-text text-center">{{ car.CarManufacturerName}} <br> {{car.CarModelName}}</p>
-</div>  
+</div>

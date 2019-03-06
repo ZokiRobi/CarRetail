@@ -16,5 +16,9 @@ namespace CarShop.Core.Models.CarModels
         public string CarModelName { get; set; }
 
         public string Description { get; set; }
+
+        public bool FixedPrice { get; set; }
+
+        public double Price { get; set; }
     }
 }

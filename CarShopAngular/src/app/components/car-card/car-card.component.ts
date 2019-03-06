@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CarModel } from 'src/app/models/CarModel';
 import { Router } from '@angular/router';
+import { CarService } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-car-card',
@@ -9,7 +10,10 @@ import { Router } from '@angular/router';
 })
 export class CarCardComponent implements OnInit {
   @Input() car: CarModel;
-  constructor(private router:Router) { }
+  @Input() indexOfCard: number;
+
+  constructor(private router: Router, 
+              private carService: CarService) { }
 
   ngOnInit() {
   }

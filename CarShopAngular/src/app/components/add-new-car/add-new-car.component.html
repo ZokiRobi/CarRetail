@@ -1,83 +1,131 @@
 <div class="container">
+
   <div class="row">
-    <div class="col-12 col-md-12 noPaddingLeft">
-      <!-- add car form start -->
-      <form [formGroup]="addCarForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
+
+    <!-- add car form start -->
+    <form [formGroup]="addCarForm" (ngSubmit)="onSubmit(form)" #form="ngForm" autocomplete="off" class="add-car-form">
+
+      <!-- Left side start -->
+      <div class="col-4 col-md-4">
+
         <!-- manufacturer start -->
-        <div class="col-5 noPaddingLeft">
+        <div class="col-12  form-group">
+
           <label for="manufacturers">Manufacturer</label>
-          <ngx-select-dropdown  [multiple]="false" [options]="manufacturers" formControlName="manufacturer" [config]="configManufacturersSelect" (change)="manufacturerSelectChanged($event)"></ngx-select-dropdown>
+
+          <ngx-select-dropdown [multiple]="false" [options]="manufacturers" formControlName="manufacturer" [config]="configManufacturersSelect"
+            (change)="manufacturerSelectChanged($event)">
+          </ngx-select-dropdown>
+
         </div>
+
+        <span *ngIf="manufacturer.invalid">
+
+          <span *ngIf="manufacturer.touched || manufacturer.dirty" class="text-danger">
+            Manufacturer is required.
+          </span>
+
+        </span>
         <!-- manufacturer end -->
 
         <!-- Model start -->
-        <div class="col-5 noPaddingLeft">
+        <div class="col-12 form-group">
+
           <label for="model">Model</label>
-          <br />
-          <ngx-select-dropdown  [multiple]="false" [options]="carModels" formControlName="model" [config]="configModelsSelect"></ngx-select-dropdown>
+
+          <ngx-select-dropdown [multiple]="false" [options]="carModels" formControlName="model" [config]="configModelsSelect">
+          </ngx-select-dropdown>
+
         </div>
+
+        <span *ngIf="model.invalid">
+
+          <span *ngIf="model.touched || model.dirty" class="text-danger">
+            Model is required.
+          </span>
+
+        </span>
+
         <!-- Model end -->
 
         <!-- description start -->
-        <div class="col-5 form-group noPaddingLeft">
+        <div class="col-12 form-group">
+
           <label for="description">Description</label>
-          <textarea
-            type="text"
-            name="description"
-            formControlName="description"
-            class="form-control textarea-description"
-            cols="25"
-            rows="6"
-            [ngClass]="{
-              'input-invalid':
-                description.invalid &&
-                (description.dirty || description.touched)
-            }"
-          ></textarea>
+
+          <textarea type="text" name="description" formControlName="description" class="form-control textarea-description"
+            cols="25" rows="6" [ngClass]="{
+                     'input-invalid':
+                      description.invalid &&
+                     (description.dirty || description.touched)
+                    }">
+          </textarea>
+
           <span *ngIf="description.invalid">
-            <span
-              *ngIf="
-                description.value?.length > 0 &&
-                description.dirty &&
-                description.errors?.whitespace
-              "
-              class="text-danger"
-              >Cant be just whitespace
+
+            <span *ngIf="
+                  description.value?.length > 0 &&
+                  description.dirty &&
+                  description.errors?.whitespace
+                "
+              class="text-danger">Cant be just whitespace
             </span>
-            <span
-              *ngIf="
-                (description.touched || description.dirty) &&
-                description.value.length == 0
-              "
-              class="text-danger"
-            >
+
+            <span *ngIf="
+                  (description.touched || description.dirty) &&
+                  description.value.length == 0
+                "
+              class="text-danger">
               Description is required
             </span>
+
           </span>
+
         </div>
         <!-- description start -->
-        <div class="row noPaddingLeft">
-          <div class="col-1">
-            <!-- submit button -->
-            <button
-              type="submit"
-              [disabled]="!addCarForm.valid"
-              [title]="!addCarForm.valid ? 'All field are required' : ''"
-              [ngClass]="{
-                'btn-success': addCarForm.valid,
-                'btn-danger': !addCarForm.valid
-              }"
-              class="btn"
-            >
-              Add
-            </button>
-          </div>
-          <div class="col-2">
-            <button class="btn btn-primary" (click)="goBack()">Back</button>
-          </div>
+
+        <div class="col-12 form-group">
+
+          <!-- fixed price toggle start -->
+          <label for="fixedPrice">Fixed Price
+            <mat-slide-toggle color="primary" name="fixedPrice"></mat-slide-toggle>
+          </label>
+          <!-- fixed price toggle -->
         </div>
-      </form>
-      <!-- add car form end -->
-    </div>
+
+        <div class="col-12">
+          <!-- submit button -->
+
+          <button type="submit" [disabled]="!addCarForm.valid" [title]="!addCarForm.valid ? 'All field are required' : ''"
+            [ngClass]="{
+                  'btn-success': addCarForm.valid,
+                  'btn-danger': !addCarForm.valid
+                }"
+            class="btn">
+            Add
+          </button>
+
+          <button class="btn btn-primary float-right" (click)="goBack()">Back</button>
+        </div>
+
+
+      </div>
+      <!-- Left side end -->
+
+      <!-- Right side start -->
+      <div class="col-4 col-md-4">
+        <div class="col-12">
+
+          <label for="manufacturers">Price</label>
+
+          <input type="number" matInput />
+
+        </div>
+      </div>
+      <!-- Right side end -->
+
+    </form> <!-- add car form end -->
+
   </div>
+
 </div>
