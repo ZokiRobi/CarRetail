@@ -5,4 +5,6 @@ export class CarModel{
     CarModelId:number;
     CarModelName:string;
     Description:string;
+    Price:number;
+    FixedPrice:boolean;
 }

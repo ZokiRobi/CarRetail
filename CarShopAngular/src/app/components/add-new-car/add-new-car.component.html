@@ -6,10 +6,10 @@
     <form [formGroup]="addCarForm" (ngSubmit)="onSubmit(form)" #form="ngForm" autocomplete="off" class="add-car-form">
 
       <!-- Left side start -->
-      <div class="col-4 col-md-4">
+      <div class="col-5 form-column">
 
         <!-- manufacturer start -->
-        <div class="col-12  form-group">
+        <div class="form-group">
 
           <label for="manufacturers">Manufacturer</label>
 
@@ -29,7 +29,7 @@
         <!-- manufacturer end -->
 
         <!-- Model start -->
-        <div class="col-12 form-group">
+        <div class="form-group">
 
           <label for="model">Model</label>
 
@@ -49,51 +49,59 @@
         <!-- Model end -->
 
         <!-- description start -->
-        <div class="col-12 form-group">
+        <div class="form-group">
 
-          <label for="description">Description</label>
+          <mat-form-field 
+                class="textarea-description">
 
-          <textarea type="text" name="description" formControlName="description" class="form-control textarea-description"
-            cols="25" rows="6" [ngClass]="{
-                     'input-invalid':
-                      description.invalid &&
-                     (description.dirty || description.touched)
-                    }">
-          </textarea>
+            <textarea 
+              matInput 
+              placeholder="Description" 
+              cdkTextareaAutosize="false" 
+              matAutosizeMinRows="6" 
+              type="text"
+              name="description" 
+              formControlName="description">
+            </textarea>
 
-          <span *ngIf="description.invalid">
+              <mat-error *ngIf="description.hasError('whitespace') && !description.hasError('required')">
+                Cannot be whitespace.
+              </mat-error>
 
-            <span *ngIf="
-                  description.value?.length > 0 &&
-                  description.dirty &&
-                  description.errors?.whitespace
-                "
-              class="text-danger">Cant be just whitespace
-            </span>
+              <mat-error *ngIf="description.hasError('required')">
+                Description is <strong>required</strong>
+              </mat-error>
 
-            <span *ngIf="
-                  (description.touched || description.dirty) &&
-                  description.value.length == 0
-                "
-              class="text-danger">
-              Description is required
-            </span>
-
-          </span>
+          </mat-form-field>
 
         </div>
         <!-- description start -->
 
-        <div class="col-12 form-group">
+        
+        <div class="form-group">
 
-          <!-- fixed price toggle start -->
-          <label for="fixedPrice">Fixed Price
-            <mat-slide-toggle color="primary" name="fixedPrice"></mat-slide-toggle>
-          </label>
-          <!-- fixed price toggle -->
-        </div>
+            <mat-form-field>
+              <input type="number" matInput placeholder="Price" name="price" formControlName="price"/>
+                <mat-error *ngIf="description.hasError('required')">
+                  Description is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
 
-        <div class="col-12">
+            <div class="float-right mt20">
+
+                <!-- fixed price toggle start -->
+                <label for="fixedPrice">Fixed Price
+                  <mat-slide-toggle color="primary" name="fixedPrice" (change)="sliderChanged()"></mat-slide-toggle>
+                </label>
+                <!-- fixed price toggle end-->
+      
+              </div>
+  
+          </div>
+
+
+
+        <div class="form-group">
           <!-- submit button -->
 
           <button type="submit" [disabled]="!addCarForm.valid" [title]="!addCarForm.valid ? 'All field are required' : ''"
@@ -105,7 +113,7 @@
             Add
           </button>
 
-          <button class="btn btn-primary float-right" (click)="goBack()">Back</button>
+          <button class="btn btn-primary" (click)="goBack()">Back</button>
         </div>
 
 
@@ -113,19 +121,13 @@
       <!-- Left side end -->
 
       <!-- Right side start -->
-      <div class="col-4 col-md-4">
-        <div class="col-12">
+      <div class="col-5 form-column">
 
-          <label for="manufacturers">Price</label>
 
-          <input type="number" matInput />
-
-        </div>
       </div>
       <!-- Right side end -->
 
     </form> <!-- add car form end -->
-
   </div>
 
 </div>

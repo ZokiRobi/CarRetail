@@ -18,12 +18,13 @@ export class AddNewCarComponent implements OnInit, OnDestroy {
   addCarForm: FormGroup;
   manufacturers: Array<object>;
   carModels: Array<object>;
-  labelFixedPrice="Fixed Price";
+  labelFixedPrice = "Fixed Price";
+  sliderChecked:boolean = false;
 
   configManufacturersSelect = {
-    displayKey: "text", 
-    search: true, 
-    height: "150px", 
+    displayKey: "text",
+    search: true,
+    height: "150px",
     placeholder: "Select car", // text to be displayed when no item is selected defaults to Select,
     customComparator: () => { }, // a custom function using which user wants to sort the items. default is undefined and Array.sort() will be used in that case,
     limitTo: 1000, // a number thats limits the no of options displayed in the UI similar to angular's limitTo pipe
@@ -69,8 +70,13 @@ export class AddNewCarComponent implements OnInit, OnDestroy {
       description: new FormControl("", [
         Validators.required,
         this.validateWhiteSpace
+      ]),
+      fixedPrice: new FormControl(""),
+      price: new FormControl("", [
+        Validators.required
       ])
     });
+
   }
 
   manufacturerSelectChanged(e) {
@@ -91,6 +97,16 @@ export class AddNewCarComponent implements OnInit, OnDestroy {
   get description() {
     return this.addCarForm.get("description");
   }
+  get fixedPrice() {
+    return this.addCarForm.get("fixedPrice");
+  }
+  get price() {
+    return this.addCarForm.get("price");
+  }
+
+  sliderChanged(){
+    this.sliderChecked = !this.sliderChecked;
+  }
 
   // custom validator
   validateWhiteSpace(control: FormControl) {
@@ -98,14 +114,20 @@ export class AddNewCarComponent implements OnInit, OnDestroy {
     return !valid ? null : { whitespace: true };
   }
 
-  onSubmit(form:FormGroup) {
+  onSubmit(form: FormGroup) {
     var car: CarModel = new CarModel();
 
     if (form.valid) {
-      car.Description = this.manufacturer.value;
-      car.Description = this.model.value;
+      car.CarManufacturerId = this.manufacturer.value.id;
+      car.CarManufacturerName = this.manufacturer.value.text;
+      car.CarModelId = this.model.value.id;
+      car.CarModelName = this.model.value.text;
       car.Description = this.description.value;
-
+      car.FixedPrice = this.sliderChecked
+      car.Price = this.price.value;
+      
+      console.log(car);
+      return;
       this.addCarForm.reset();
 
       this.subsciption.add(

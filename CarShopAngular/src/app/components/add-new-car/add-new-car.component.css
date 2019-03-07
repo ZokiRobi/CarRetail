@@ -1,6 +1,5 @@
 .textarea-description {
   width: 100%;
-  resize: none;
   padding-right: 0;
   min-width: 100%;
 }
@@ -20,4 +19,20 @@
 .add-car-form{
   margin-top:20px;
   width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.form-column{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn.btn-primary{
+  margin-left: 5px;
+}
+
+.mt20{
+  margin-top: 20px;
 }
